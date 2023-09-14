@@ -1,0 +1,22 @@
+#!/bin/bash
+
+
+for i in java cpp js
+do
+        echo "you like $i"
+done
+
+#for line in $(/root/MonitorHTTPD.sh)
+#do
+#       echo $line
+#done
+
+for i in {1..10..2}
+do
+        echo $i
+done
+
+for ((i=1;i<20;i++))
+do
+        echo $i
+done

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+read -p "Enter a number :" NUM
+
+if [ $NUM -eq 0 ]
+then
+        echo "ZERO is not allowed"
+
+elif [ $NUM -ge 1 ] && [ $NUM -le 9 ]
+then
+       echo "value is between 1 to 10"
+else
+        echo "Value is greater than 9"
+fi

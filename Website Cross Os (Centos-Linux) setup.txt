@@ -1,0 +1,51 @@
+echo "#################################"
+echo
+echo "Author  :        Abhijith"
+echo "Date    :        09/04/2023"
+echo "Version :        V01"
+echo
+echo "#################################"
+echo
+
+URL='https://www.tooplate.com/zip-templates/2137_barista_cafe.zip'
+FOLDER='2137_barista_cafe'
+TEMP_FOLDER='/tmp/websitefiles'
+
+echo "Downloading required packages"
+yum -y > /dev/null
+
+if [ $? -eq 0 ]
+then
+        PACKAGES="unzip wget httpd "
+        SERVICE='httpd'
+        yum install $PACKAGES -y > /dev/null
+        echo "it's a centos machine"
+else
+        echo "It's a linux machine"
+        apt update -y > /dev/null
+        PACKAGES="unzip wget apache2"
+        SERVICE="apache2"
+        apt install $PACKAGES -y > /dev/null
+fi
+echo "Starting and enabling servive"
+systemctl start $SERVICE
+systemctl enable $SERVICE
+
+mkdir -p $TEMP_FOLDER
+cd $TEMP_FOLDER
+echo "Loading files to html folder"
+wget $URL > /dev/null
+unzip $FOLDER.zip > /dev/null
+rm -rf /var/www/html/*
+cp -r $FOLDER/* /var/www/html > /dev/null
+echo "Restarting $SERVICE service"
+systemctl restart $SERVICE
+
+echo
+echo "##################################"
+public_ip=$(ip addr show | grep "$192.168." | awk '{print $2}' | awk -F'/' '{print $1}')
+echo
+echo "Search $public_ip in your host machine to see the output"
+echo
+echo "##################################"
+rm -rf $TEMP_FOLDER

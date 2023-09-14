@@ -1,0 +1,28 @@
+#!/bin/bash
+
+echo "################################"
+echo "MONITORING HTTPD SERVICE"
+echo `date`
+echo "################################"
+
+
+if [ -e /var/run/httpd/httpd.pid  ]
+then
+        echo "httpd is running"
+else
+        echo "httpd is not running"
+        echo "Starting the service....."
+        systemctl start httpd
+        if [ $? -eq 0 ]
+        then
+                echo "httpd started"
+        else
+                echo "Unable to start. Contact admin"
+        fi
+fi
+echo "################################"
+
+sleep 4s
+echo  "###############################"
+echo "Stopping the service"
+systemctl stop httpd

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "##############################"
+echo "Author   : Abhijith"
+echo "Date     : 9/4/2023"
+echo "Version  : V01"
+echo "##############################"
+echo
+
+FREE_RAM=`free -m | grep -i mem | awk '{print $4}'`
+LOAD=`uptime | awk '{print $9}'`
+FREE_ROOT=$(df -h | grep -i '/dev/sda1' | awk '{print $4}')
+
+echo "##### SYSTEM INFORMATIONS #####"
+echo
+echo "Availabe RAM is $FREE_RAM mb."
+echo "Current LOAD average is $LOAD"
+echo "Free ROOT partition is $FREE_ROOT"
+echo "Number of CPUs in this machine is $(nproc)"
+echo
+echo "##############################"
